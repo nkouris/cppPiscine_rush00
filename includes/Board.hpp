@@ -4,7 +4,7 @@
 # include "AEntity.hpp"
 # include <ncurses.h>
 
-//  --C-----> width, x
+//  -------> width, x
 // |
 // |
 // |
