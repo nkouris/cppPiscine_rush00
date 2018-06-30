@@ -28,6 +28,8 @@ public:
 
 private:
 
+	int					_width;
+	int					_height;
 	AEntity	**			_cells;		// 1D array containing AEntity *
 
 	Board(void);
