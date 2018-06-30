@@ -8,6 +8,7 @@ Player::~Player(void) { }
 
 void			Player::update(Board *board)
 {
+	board->setCell(this->getPosX(), this->getPosY(), this);
 	(void)board;
 }
 

@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <ncurses.h>
+# include <unistd.h>
 # include "Player.hpp"
 # include "AEntity.hpp"
 # include "Bullet.hpp"

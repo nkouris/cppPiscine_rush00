@@ -25,6 +25,7 @@ public:
 
 	void				updateAllCells(void);
 	void				renderAllCells(WINDOW *win);
+	void				clearCell(int x, int y);
 
 private:
 

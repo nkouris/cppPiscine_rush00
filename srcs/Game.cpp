@@ -9,7 +9,8 @@ Game::Game(void)
 {
 	initscr();
 	raw();
-	halfdelay(1);	// this blocks getch() up to 1/10 second, or none at all if user just holds down a keystroke
+//	halfdelay(1);	// this blocks getch() up to 1/10 second, or none at all if user just holds down a keystroke
+	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
@@ -35,7 +36,6 @@ Game::~Game(void)
 	if (this->_infoWindow) delwin(this->_infoWindow);
 	endwin();
 
-	delete _player;
 	delete _board;
 }
 
@@ -49,8 +49,9 @@ void				Game::run(void)
 {
 	while (this->_isGameOver == false)
 	{
+		usleep(25000);
 		this->_processInput();
-//		this->_update();	// disabled for debugging; press 't' to run update once
+		this->_update();	// disabled for debugging; press 't' to run update once
 		this->_render();
 	}
 }
@@ -64,16 +65,32 @@ void				Game::_processInput(void)
 	switch (getch())
 	{
 		case (KEY_UP):
+//			this->_board->clearCell(this->_player->getPosX(),
+//					this->_player->getPosY());
 			this->_player->setPosY(this->_player->getPosY() - 1);
+//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
+//			this->_player->update(this->_board);
 			break;
 		case (KEY_DOWN):
+//			this->_board->clearCell(this->_player->getPosX(),
+//					this->_player->getPosY());
 			this->_player->setPosY(this->_player->getPosY() + 1);
+//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
+//			this->_player->update(this->_board);
 			break;
 		case (KEY_LEFT):
+//			this->_board->clearCell(this->_player->getPosX(),
+//					this->_player->getPosY());
 			this->_player->setPosX(this->_player->getPosX() - 1);
+//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
+//			this->_player->update(this->_board);
 			break;
 		case (KEY_RIGHT):
+//			this->_board->clearCell(this->_player->getPosX(),
+//					this->_player->getPosY());
 			this->_player->setPosX(this->_player->getPosX() + 1);
+//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
+//			this->_player->update(this->_board);
 			break;
 		case (' '):
 			Game::playSound("sounds/laser_1b.wav");

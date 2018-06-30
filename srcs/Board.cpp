@@ -13,7 +13,7 @@ Board::~Board(void)
 {
 	for (int i = 0; i < this->_width * this->_height; i++)
 	{
-//		delete this->_cells[i];		// WHY DOES THIS CAUSE MALLOC ERROR
+		delete this->_cells[i];		// WHY DOES THIS CAUSE MALLOC ERROR
 	}
 	delete [] this->_cells;
 }
@@ -52,6 +52,13 @@ void				Board::setCell(int x, int y, AEntity *e)
 	else
 		delete e;
 	*/
+}
+
+void				Board::clearCell(int x, int y)
+{
+	int				i = this->_width * y + x;
+
+	this->_cells[i] = NULL;
 }
 
 void				Board::updateAllCells(void)
