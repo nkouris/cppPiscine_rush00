@@ -13,7 +13,7 @@ Board::~Board(void)
 {
 	for (int i = 0; i < this->_width * this->_height; i++)
 	{
-		delete this->_cells[i];		// WHY DOES THIS CAUSE MALLOC ERROR
+		delete this->_cells[i];
 	}
 	delete [] this->_cells;
 }
@@ -30,16 +30,10 @@ AEntity *			Board::getCell(int x, int y) const
 
 void				Board::setCell(int x, int y, AEntity *e)
 {
-	// simplified version for debugging
-	int				i = this->_width * y + x;
-	
-	if (0 <= i && i < this->_width * this->_height)
-		this->_cells[this->_width * y + x] = e;
 
-	// later version, with collision detection handled here
-	/*
-	if (0 <= i && i < this->_width * this->_height)
+	if (0 <= x && x < this->_width && 0 <= y && y < this->_height)
 	{
+		int			i = this->_width * y + x;
 		if (this->_cells[i])
 		{
 			delete this->_cells[i];
@@ -47,11 +41,11 @@ void				Board::setCell(int x, int y, AEntity *e)
 			this->_cells[i] = NULL;
 		}
 		else
-			this->_cells[this->_width * y + x] = e;
+			this->_cells[i] = e;
 	}
 	else
 		delete e;
-	*/
+
 }
 
 void				Board::clearCell(int x, int y)

@@ -1,0 +1,29 @@
+#ifndef AMOVING_HPP
+# define AMOVING_HPP
+
+# include "AEntity.hpp"
+
+enum Direction { UP, DOWN, LEFT, RIGHT };
+
+class Board;
+
+class AMoving : public AEntity
+{
+public:
+
+	AMoving(int const x, int const y, char const symbol, int const moveSpeed);
+	virtual ~AMoving(void);
+
+	virtual void	movePattern(Board *board) = 0;
+
+protected:
+
+	int				_moveSpeed;
+	int				_moveInc;
+
+	AMoving(AMoving const &src);
+	AMoving &		operator=(AMoving const &rhs);
+
+};
+
+#endif

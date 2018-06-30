@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Game.hpp"
+# include <ncurses.h>
 
 Player::Player(int const x, int const y, char const symbol) :
 	AEntity(x, y, symbol) { }
@@ -8,7 +9,6 @@ Player::~Player(void) { }
 
 void			Player::update(Board *board)
 {
-	board->setCell(this->getPosX(), this->getPosY(), this);
 	(void)board;
 }
 

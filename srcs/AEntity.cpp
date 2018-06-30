@@ -1,7 +1,8 @@
 #include "AEntity.hpp"
+#include "Board.hpp"
 
 AEntity::AEntity(int const x, int const y, char const symbol) :
-	_posX(x), _posY(y), _symbol(symbol), _delete(false) { }
+	_posX(x), _posY(y), _symbol(symbol) { }
 
 AEntity::~AEntity(void) { }
 
@@ -12,4 +13,10 @@ void						AEntity::setPosX(int x) { this->_posX = x; }
 void						AEntity::setPosY(int y) { this->_posY = y; }
 void						AEntity::setSymbol(char symbol) { this->_symbol = symbol; }
 
-void						AEntity::markDelete(void) { this->_delete = true; }
+void						AEntity::move(int x, int y, Board *board)
+{
+	board->clearCell(this->_posX, this->_posY);
+	this->setPosX(x);
+	this->setPosY(y);
+	board->setCell(this->_posX, this->_posY, this);
+}

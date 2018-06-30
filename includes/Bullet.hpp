@@ -1,21 +1,25 @@
 #ifndef BULLET_HPP
 # define BULLET_HPP
 
-# include "AEntity.hpp"
+# include "AMoving.hpp"
 
-class Bullet : public AEntity
+enum Direction;
+
+class Bullet : public AMoving
 {
 public:
 
-	Bullet(int const x, int const y, char const symbol);
+	Bullet(int const x, int const y, char const symbol, int const moveSpeed, Direction direction);
 	~Bullet(void);
 
 	void			update(Board *board);
-	
+	virtual void	movePattern(Board *board);
+
+protected:
+
+	Direction		_direction;
 
 private:
-
-	int				_moveSpeed;
 
 	Bullet(Bullet const &src);
 	Bullet &		operator=(Bullet const &src);

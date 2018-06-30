@@ -1,7 +1,8 @@
 #include "Game.hpp"
+#include "BulletKnight.hpp"
 
-const int	Game::GAME_WINDOW_WIDTH = 20;
-const int	Game::GAME_WINDOW_HEIGHT = 20;
+const int	Game::GAME_WINDOW_WIDTH = 30;
+const int	Game::GAME_WINDOW_HEIGHT = 30;
 const int	Game::INFO_WINDOW_WIDTH = 30;
 const int	Game::INFO_WINDOW_HEIGHT = 30;
 
@@ -64,38 +65,24 @@ void				Game::_processInput(void)
 {
 	switch (getch())
 	{
+		
 		case (KEY_UP):
-//			this->_board->clearCell(this->_player->getPosX(),
-//					this->_player->getPosY());
-			this->_player->setPosY(this->_player->getPosY() - 1);
-//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
-//			this->_player->update(this->_board);
+			this->_player->move(this->_player->getPosX(), this->_player->getPosY() - 1, this->_board);
 			break;
 		case (KEY_DOWN):
-//			this->_board->clearCell(this->_player->getPosX(),
-//					this->_player->getPosY());
-			this->_player->setPosY(this->_player->getPosY() + 1);
-//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
-//			this->_player->update(this->_board);
+			this->_player->move(this->_player->getPosX(), this->_player->getPosY() + 1, this->_board);
 			break;
 		case (KEY_LEFT):
-//			this->_board->clearCell(this->_player->getPosX(),
-//					this->_player->getPosY());
-			this->_player->setPosX(this->_player->getPosX() - 1);
-//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
-//			this->_player->update(this->_board);
+			this->_player->move(this->_player->getPosX() - 1, this->_player->getPosY(), this->_board);
 			break;
 		case (KEY_RIGHT):
-//			this->_board->clearCell(this->_player->getPosX(),
-//					this->_player->getPosY());
-			this->_player->setPosX(this->_player->getPosX() + 1);
-//			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
-//			this->_player->update(this->_board);
+			this->_player->move(this->_player->getPosX() + 1, this->_player->getPosY(), this->_board);
 			break;
 		case (' '):
 			Game::playSound("sounds/laser_1b.wav");
 			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY() - 1,
-				new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, '*'));
+				new BulletKnight(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP, LEFT));
+				//new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP));
 			break;
 		case ('q'):
 			this->_isGameOver = true;

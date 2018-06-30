@@ -14,6 +14,12 @@ public:
 	void				setPosY(int y);
 
 	void				update(Board *board);
+
+	void				moveUp(void);
+	void				moveDown(void);
+	void				moveLeft(void);
+	void				moveRight(void);
+
 	
 private:
 	

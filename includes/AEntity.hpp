@@ -19,13 +19,13 @@ public:
 	virtual void				setPosY(int y);
 	void						setSymbol(char symbol);
 
-	void						markDelete(void);
+	void						move(int x, int y, Board *board);
 
 protected:
+
 	int							_posX;
 	int							_posY;
 	char						_symbol;
-	bool						_delete;
 
 private:
 	
