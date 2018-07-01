@@ -4,9 +4,7 @@
 #include "AMoving.hpp"
 #include "Game.hpp"
 
-class		Scene : AMoving {
-
-	protected:
+class		Scene : public AMoving {
 
 	public:
 		Scene(void);
@@ -14,7 +12,12 @@ class		Scene : AMoving {
 		Scene(Scene const & src);
 		~Scene(void);
 		Scene&	operator=(Scene const & rhs);
-		void	movePattern(Board *board);	
+
+		void	movePattern(Board *board);
+		void	update(Board *board);
+	
+	protected:
+
 };
 
 std::ostream& operator<<(std::ostream &, Scene const &);
