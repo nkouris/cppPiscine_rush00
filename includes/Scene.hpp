@@ -8,7 +8,7 @@ class		Scene : public AMoving
 {
 public:
 	Scene(void);
-	Scene(int const x, int const y, unsigned int const symbol, int const moveSpeed);
+	Scene(int const x, int const y);
 	Scene(Scene const & src);
 	~Scene(void);
 	Scene&	operator=(Scene const & rhs);

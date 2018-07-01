@@ -12,7 +12,6 @@ public:
 
 	void			update(Board *board);
 	void			movePattern(Board *board);
-	void			shoot(void);
 
 private:
 

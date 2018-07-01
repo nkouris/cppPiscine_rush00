@@ -38,19 +38,22 @@ void				Board::setCell(int x, int y, AEntity *e)
 		if (this->_cells[i])
 		{
 			Player *p = NULL;
+			bool isPlayerDead = false;
 
 			if ((p = dynamic_cast<Player *>(this->_cells[i])))
-				p->killMe();
+				isPlayerDead = p->killMe();
 			else	
 				delete this->_cells[i];
 
 			if (!p && (p = dynamic_cast<Player *>(e)))
-				p->killMe();
+				isPlayerDead = p->killMe();
 			else
 				delete e;
-//			delete this->_cells[i];
-//			delete e;
-			this->_cells[i] = NULL;
+
+			if (!isPlayerDead && p)
+				this->_cells[i] = p;
+			else
+				this->_cells[i] = NULL;
 		}
 		else
 			this->_cells[i] = e;

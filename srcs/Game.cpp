@@ -18,8 +18,6 @@ Game::Game(void)
 	start_color();
 	refresh();
 
-	_start = std::chrono::steady_clock::now();
-	
 	this->_gameWindow = newwin(GAME_WINDOW_HEIGHT + 2, GAME_WINDOW_WIDTH + 2, 0, 0);
 	this->_infoWindow = newwin(INFO_WINDOW_HEIGHT + 2, INFO_WINDOW_WIDTH + 2, 0, GAME_WINDOW_WIDTH + 3);
 	
@@ -36,6 +34,37 @@ Game::Game(void)
 	
 	this->_isGameOver = false;
 	this->_score = 0;
+
+	_start = std::chrono::steady_clock::now();
+
+	static std::string bgm[23] =
+	{
+		"sounds/Hotline_Miami_OST/ANewMorning.mp3",
+		"sounds/Hotline_Miami_OST/Crush.mp3",
+		"sounds/Hotline_Miami_OST/Crystals.mp3",
+		"sounds/Hotline_Miami_OST/Daisuke.mp3",
+		"sounds/Hotline_Miami_OST/DeepCover.mp3",
+		"sounds/Hotline_Miami_OST/ElectricDreams.mp3",
+		"sounds/Hotline_Miami_OST/Flatline.mp3",
+		"sounds/Hotline_Miami_OST/HorseSteppin.mp3",
+		"sounds/Hotline_Miami_OST/Hotline.mp3",
+		"sounds/Hotline_Miami_OST/Hydrogen.mp3",
+		"sounds/Hotline_Miami_OST/InnerAnimal.mp3",
+		"sounds/Hotline_Miami_OST/ItsSafeNow.mp3",
+		"sounds/Hotline_Miami_OST/Knock.mp3",
+		"sounds/Hotline_Miami_OST/Miami2.mp3",
+		"sounds/Hotline_Miami_OST/Musikk2.mp3",
+		"sounds/Hotline_Miami_OST/Paris2.mp3",
+		"sounds/Hotline_Miami_OST/Perturbator.mp3",
+		"sounds/Hotline_Miami_OST/Release.mp3",
+		"sounds/Hotline_Miami_OST/SilverLights.mp3",
+		"sounds/Hotline_Miami_OST/Static.mp3",
+		"sounds/Hotline_Miami_OST/ToTheTop.mp3",
+		"sounds/Hotline_Miami_OST/TurfIntro.mp3",
+		"sounds/Hotline_Miami_OST/TurfMain.mp3"
+	};
+
+	Game::playSound(bgm[std::rand() % 23]);
 }
 
 Game::~Game(void)
@@ -46,11 +75,12 @@ Game::~Game(void)
 
 	delete this->_sceneBoard;
 	delete this->_board;
+	std::system("pkill -f afplay");
 }
 
 void				Game::playSound(std::string soundFile)
 {
-	std::string		command = "pkill -f afplay; afplay " + soundFile + " &";
+	std::string		command = "afplay " + soundFile + " &";
 	std::system(command.c_str());
 }
 
@@ -63,7 +93,7 @@ void				Game::run(void)
 		this->_render();
 		usleep(25000);
 	}
-
+	Game::playSound("sounds/youLose.wav");
 	nodelay(stdscr, FALSE);
 	getch();
 }
@@ -134,16 +164,17 @@ void				Game::_update(void)
 
 void				Game::_generateScenery(void)
 {
-	Scene			*temp = NULL;
-	int				x, moveSpeed, nobjects;
+	//Scene			*temp = NULL;
+	int				x, nobjects;
 
 	nobjects = std::rand() % 4;
 	x = std::rand() % this->GAME_WINDOW_WIDTH;
-	moveSpeed = std::rand() % 20;
+//	moveSpeed = std::rand() % 20;
 
 	while (nobjects--)
 	{
-		temp = new Scene(x, 0, 'A', moveSpeed);
+		//temp = new Scene(x, 0, 'A', moveSpeed);
+		Scene *temp = new Scene(x, 0);
 		this->_sceneBoard->setCell(temp->getPosX(), temp->getPosY(), temp);
 	}
 }
@@ -151,27 +182,48 @@ void				Game::_generateScenery(void)
 void				Game::_generateEnemies(void)
 {
 /* switch statement for difficulty selection */
-	if (std::rand() % 100 >= 5) return;
 
-	int				x, y;
-	if (std::rand() % 2)
+
+	// spawn EnemyCop section
+	if (std::rand() % 100 < 2)
 	{
-		// at top or bottom border
-		x = std::rand() % GAME_WINDOW_WIDTH;
-		y = (std::rand() % 2) ? 0 : GAME_WINDOW_HEIGHT - 1;
-	}
-	else
-	{
-		// at left or right border
-		x = (std::rand() % 2) ? 0 : GAME_WINDOW_WIDTH - 1;
-		y = std::rand() % GAME_WINDOW_HEIGHT;
+		int x = GAME_WINDOW_WIDTH - 1;
+		int y = std::rand() % GAME_WINDOW_HEIGHT;
+
+		if (this->_board->getCell(x, y) == NULL)
+		{
+			EnemyCop *e = new EnemyCop(x, y, this);
+			this->_board->setCell(x, y, e);
+		}
 	}
 
-	if (this->_board->getCell(x, y) == NULL)
+
+	
+	// spawn EnemyFace section
+	if (std::rand() % 100 < 5)
 	{
-		EnemyFace *e = new EnemyFace(x, y, this);
-		this->_board->setCell(x, y, e);
+		int				x, y;
+		if (std::rand() % 2)
+		{
+			// at top or bottom border
+			x = std::rand() % GAME_WINDOW_WIDTH;
+			y = (std::rand() % 2) ? 0 : GAME_WINDOW_HEIGHT - 1;
+		}
+		else
+		{
+			// at left or right border
+			x = (std::rand() % 2) ? 0 : GAME_WINDOW_WIDTH - 1;
+			y = std::rand() % GAME_WINDOW_HEIGHT;
+		}
+
+		if (this->_board->getCell(x, y) == NULL)
+		{
+			EnemyFace *e = new EnemyFace(x, y, this);
+			this->_board->setCell(x, y, e);
+		}
 	}
+	
+	
 }
 
 
@@ -210,8 +262,14 @@ void				Game::_updateInfoWindow(void) const
 
 	mvwprintw(this->_infoWindow, 1, 1, "Time:\t%02s:%02s", minutesTime.data(), secondsTime.data());
 	mvwprintw(this->_infoWindow, 2, 1, "Score:\t%llu", this->_score);
-	mvwprintw(this->_infoWindow, 4, 1, "Lives:\t%u", this->_isGameOver ? 0 : this->_player->getLives());
-	mvwprintw(this->_infoWindow, 5, 1, "Bombs:\t%u", this->_isGameOver ? 0 : this->_player->getBombs());
+	//mvwprintw(this->_infoWindow, 4, 1, "Lives:\t%u", this->_isGameOver ? 0 : this->_player->getLives());
+	mvwprintw(this->_infoWindow, 4, 1, "Lives:\t");
+	for (int i = 0; i < this->_player->getLives(); i++)
+		wprintw(this->_infoWindow, "%lc ", L'💖');
+	//mvwprintw(this->_infoWindow, 5, 1, "Bombs:\t%u", this->_isGameOver ? 0 : this->_player->getBombs());
+	mvwprintw(this->_infoWindow, 5, 1, "Bombs:\t");
+	for (int i = 0; i < this->_player->getBombs(); i++)
+		wprintw(this->_infoWindow, "%lc ", L'💣');
 
 	if (this->_isGameOver)
 	{

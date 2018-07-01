@@ -2,8 +2,9 @@
 # define PLAYER_HPP
 
 # include "AEntity.hpp"
+# include "IShoot.hpp"
 
-class Player : public AEntity
+class Player : public AEntity, public IShoot
 {
 public:
 
@@ -21,9 +22,7 @@ public:
 	void				shoot(void);
 	void				bomb(void);
 
-	void				killMe(void);
-
-//	static void				operator delete(void *ptr);
+	bool				killMe(void);
 
 private:
 

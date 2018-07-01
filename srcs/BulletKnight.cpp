@@ -2,13 +2,7 @@
 
 
 BulletKnight::BulletKnight(int const x, int const y, unsigned int const symbol, int const moveSpeed, Direction direction, Direction knightDirection) :
-	Bullet(x, y, symbol, moveSpeed, direction), _knightDirection(knightDirection)
-{
-	this->_attributes = A_UNDERLINE;
-	this->_foregroundColor = COLOR_MAGENTA;
-	this->_backgroundColor = COLOR_BLUE;
-	this->_colorCode = BulletColorCode;
-}
+	Bullet(x, y, symbol, moveSpeed, direction), _knightDirection(knightDirection) { }
 
 BulletKnight::~BulletKnight(void) { }
 

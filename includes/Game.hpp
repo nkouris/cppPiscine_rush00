@@ -14,6 +14,7 @@
 # include "BulletKnight.hpp"
 # include "EnemyTypeB.hpp"
 # include "EnemyFace.hpp"
+# include "EnemyCop.hpp"
 
 
 # define MAX(a, b)				((a) > (b) ? (a) : (b))

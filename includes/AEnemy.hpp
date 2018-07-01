@@ -14,7 +14,6 @@ public:
 
 	virtual void		update(Board *board) = 0;
 	virtual void		movePattern(Board *board) = 0;
-	virtual void		shoot(void) = 0;
 
 protected:
 

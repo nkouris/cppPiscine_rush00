@@ -69,8 +69,3 @@ void			EnemyFace::movePattern(Board *board)
 		}
 	}
 }
-
-void			EnemyFace::shoot(void)
-{
-	// this guy doesn't shoot, but he's probably thinking about it 🤔
-}

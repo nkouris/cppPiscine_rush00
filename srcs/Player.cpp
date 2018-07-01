@@ -6,7 +6,7 @@
 
 Player::Player(int const x, int const y, Game *game) : AEntity(x, y, L'🍔'), _game(game)
 {
-	this->_shotCooldown = 20;
+	this->_shotCooldown = 10;
 	this->_cooldown = 0;
 	this->_lives = 3;
 	this->_bombs = 5;
@@ -18,23 +18,20 @@ Player::~Player(void)
 	this->_game->setGameOver();
 }
 
-void			Player::killMe(void)
+bool			Player::killMe(void)
 {
 	if (this->_lives > 0)
+	{
 		this->_lives--;
+		return (false);
+	}
 	else
+	{
 		delete this;
+		return (true);
+	}
 }
-/*
-void			Player::operator delete(void *ptr)
-{
-	Player *p = (Player *)ptr;
-	if (p->_lives > 0)
-		p->_lives--;
-	else
-		::operator delete(ptr);
-}
-*/
+
 void			Player::update(Board *board)
 {
 	(void)board;
@@ -66,14 +63,14 @@ void			Player::shoot()
 		switch (std::rand() % 3)
 		{
 			case (0):
-				b = new Bullet(this->getPosX(), this->getPosY() - 1, L'🍟', 5, UP);
+				b = new BulletKnight(this->getPosX(), this->getPosY() - 1, L'🍟', 3, UP, RIGHT);
 				break;
 			case (1):
-				b = new BulletKnight(this->getPosX(), this->getPosY() - 1, L'🍟', 5, UP, LEFT);
+				b = new BulletKnight(this->getPosX(), this->getPosY() - 1, L'🍟', 3, UP, LEFT);
 				break;
 			case (2):
 			default:
-				b = new BulletKnight(this->getPosX(), this->getPosY() - 1, L'🍟', 5, UP, RIGHT);
+				b = new Bullet(this->getPosX(), this->getPosY() - 1, L'🍟', 3, UP);
 				break;
 		}
 
