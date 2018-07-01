@@ -1,6 +1,8 @@
 #ifndef AENTITY_HPP
 # define AENTITY_HPP
 
+# include <ncurses.h>
+
 class Board;
 
 class AEntity
@@ -14,6 +16,9 @@ public:
 	int							getPosX(void) const;
 	int							getPosY(void) const;
 	char						getSymbol(void) const;
+	int							getAttributes(void) const;
+	int							getForegroundColor(void) const;
+	int							getBackgroundColor(void) const;
 
 	virtual void				setPosX(int x);
 	virtual void				setPosY(int y);
@@ -26,6 +31,9 @@ protected:
 	int							_posX;
 	int							_posY;
 	char						_symbol;
+	int							_attributes;
+	int							_foregroundColor;
+	int							_backgroundColor;
 
 private:
 	

@@ -15,6 +15,7 @@ Game::Game(void)
 	nodelay(stdscr, TRUE);
 	noecho();
 	curs_set(0);
+	start_color();
 	refresh();
 
 	this->_gameWindow = newwin(GAME_WINDOW_HEIGHT + 2, GAME_WINDOW_WIDTH + 2, 0, 0);
@@ -131,6 +132,7 @@ void				Game::_updateGameWindow(void) const
 	this->_sceneBoard->renderAllCells(this->_gameWindow);
 	this->_board->renderAllCells(this->_gameWindow);
 	
+	//box(this->_gameWindow, 0, 0);
 	wborder(this->_gameWindow, '|', '|', '-', '-', '+', '+', '+', '+');
 	wrefresh(this->_gameWindow);
 }
@@ -144,6 +146,7 @@ void				Game::_updateInfoWindow(void) const
 	mvwprintw(this->_infoWindow, 4, 1, "%s:\t%u", "Lives", this->_lives);
 	mvwprintw(this->_infoWindow, 5, 1, "%s:\t%u", "Bombs", this->_bombs);
 
+//	box(this->_infoWindow, 0, 0);
 	wborder(this->_infoWindow, '|', '|', '-', '-', '+', '+', '+', '+');
 	wrefresh(this->_infoWindow);
 }

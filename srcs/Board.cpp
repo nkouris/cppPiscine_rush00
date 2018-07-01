@@ -69,6 +69,13 @@ void				Board::renderAllCells(WINDOW *win)
 	for (int i = 0; i < this->_width * this->_height; i++)
 	{
 		if (this->_cells[i])
+		{
+			wattron(win, this->_cells[i]->getAttributes());
+			init_pair(1, this->_cells[i]->getForegroundColor(), this->_cells[i]->getBackgroundColor());
+			wattron(win, COLOR_PAIR(1));
 			mvwprintw(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, "%c", this->_cells[i]->getSymbol());
+			wattroff(win, COLOR_PAIR(1));
+			wattroff(win, this->_cells[i]->getAttributes());
+		}
 	}
 }
