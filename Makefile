@@ -7,7 +7,8 @@ CFLAGS = -Wall -Werror -Wextra
 INCLUDES = includes
 
 SRCSDIR = srcs/
-SRCS = AEntity.cpp AMoving.cpp Board.cpp Bullet.cpp BulletKnight.cpp Game.cpp Player.cpp main.cpp
+SRCS = AEntity.cpp AMoving.cpp Board.cpp Bullet.cpp BulletKnight.cpp Game.cpp Player.cpp main.cpp \
+	   Scene.cpp
 
 OBJDIR = objs/
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.cpp=.o))

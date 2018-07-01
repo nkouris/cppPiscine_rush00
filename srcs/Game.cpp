@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "BulletKnight.hpp"
 
 const int	Game::GAME_WINDOW_WIDTH = 30;
 const int	Game::GAME_WINDOW_HEIGHT = 30;
@@ -112,7 +111,17 @@ void				Game::_update(void)
 
 void				Game::_generateScenery(void)
 {
+	Scene	*temp = NULL;
+	int		x, moveSpeed, nobjects;
 
+	nobjects = std::rand() % 4;
+	x = std::rand() % this->GAME_WINDOW_WIDTH;
+	moveSpeed = std::rand() % 20;
+	while (nobjects--)
+	{
+		temp = new Scene(x, 0, '.', moveSpeed);
+		this->_sceneBoard->setCell(temp->getPosX(), temp->getPosY(), temp);
+	}
 }
 
 // -----------------------------------------------------------------------------------
