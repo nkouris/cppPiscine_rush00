@@ -1,15 +1,14 @@
 #include "Scene.hpp"
 #include <ncurses.h>
 
-Scene::Scene(int const x, int const y, char const symbol, int const moveSpeed) :
+Scene::Scene(int const x, int const y, unsigned char const symbol, int const moveSpeed) :
 	AMoving(x, y, symbol, moveSpeed)
 {
-	/*
-//	this->_attributes = A_NORMAL;
-	this->_foregroundColor = COLOR_MAGENTA;
-	this->_backgroundColor = COLOR_BLUE;
-	this->_symbol = 'F';
-	*/
+	this->_attributes = A_BLINK;
+	this->_foregroundColor = std::rand() % (7 + 1 - 1) + 1;
+	this->_backgroundColor = COLOR_BLACK;
+	this->_symbol = '.';
+	this->_colorCode = SceneColorCode;
 }
 
 Scene::~Scene(void)

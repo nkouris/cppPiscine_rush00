@@ -1,7 +1,7 @@
 #include "BulletKnight.hpp"
 
 
-BulletKnight::BulletKnight(int const x, int const y, char const symbol, int const moveSpeed, Direction direction, Direction knightDirection) :
+BulletKnight::BulletKnight(int const x, int const y, unsigned char const symbol, int const moveSpeed, Direction direction, Direction knightDirection) :
 	Bullet(x, y, symbol, moveSpeed, direction), _knightDirection(knightDirection)
 {
 	this->_attributes = A_UNDERLINE;

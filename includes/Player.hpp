@@ -7,7 +7,7 @@ class Player : public AEntity
 {
 public:
 
-	Player(int const x, int const y, char const symbol);
+	Player(int const x, int const y, unsigned char const symbol);
 	~Player(void);
 
 	void				setPosX(int x);
@@ -22,7 +22,7 @@ public:
 
 private:
 	
-	char			_symbol;
+	unsigned char		_symbol;
 
 	Player(Player const &src);
 	Player &		operator=(Player const &rhs);

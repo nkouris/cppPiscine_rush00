@@ -10,6 +10,7 @@
 # include "Board.hpp"
 # include "Scene.hpp"
 # include "BulletKnight.hpp"
+# include "EnemyTypeB.hpp"
 
 # define MAX(a, b)				((a) > (b) ? (a) : (b))
 # define MIN(a, b)				((a) < (b) ? (a) : (b))
@@ -57,6 +58,7 @@ private:
 	void						_updateGameWindow(void) const;
 	void						_updateInfoWindow(void) const;
 	void						_generateScenery(void);
+//	void						_generateEnemies(void);
 
 	
 

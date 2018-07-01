@@ -25,7 +25,7 @@ Game::Game(void)
 	
 	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, 'A');
 	this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
-
+	this->_board->setCell(GAME_WINDOW_WIDTH / 2, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2, 5, '%', 6));
 	this->_isGameOver = false;
 	this->_time = 0;
 	this->_score = 0;
@@ -56,7 +56,7 @@ void				Game::run(void)
 	{
 		usleep(25000);
 		this->_processInput();
-	//	this->_update();	// disabled for debugging; press 't' to run update once
+//		this->_update();	// disabled for debugging; press 't' to run update once
 		this->_render();
 	}
 }
@@ -84,8 +84,8 @@ void				Game::_processInput(void)
 		case (' '):
 			Game::playSound("sounds/laser_1b.wav");
 			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY() - 1,
-				new BulletKnight(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP, LEFT));
-				//new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP));
+	//			new BulletKnight(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP, LEFT));
+				new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 5, UP));
 			break;
 		case ('q'):
 			this->_isGameOver = true;
@@ -105,7 +105,7 @@ void				Game::_processInput(void)
 void				Game::_update(void)
 {
 	this->_generateScenery();
-	
+//	this->_generateEnemies();
 	this->_sceneBoard->updateAllCells();
 	this->_board->updateAllCells();
 }
@@ -124,6 +124,12 @@ void				Game::_generateScenery(void)
 		this->_sceneBoard->setCell(temp->getPosX(), temp->getPosY(), temp);
 	}
 }
+
+/*
+void				Game::_generateEnemies(void)
+{
+}
+*/
 
 // -----------------------------------------------------------------------------------
 // RENDER

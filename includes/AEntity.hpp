@@ -3,21 +3,21 @@
 
 # include <ncurses.h>
 
-enum ColorCode { PlayerColorCode = 1, BulletColorCode };
+enum ColorCode { PlayerColorCode = 1, BulletColorCode, SceneColorCode };
 
 class Board;
 
 class AEntity
 {
 public:
-	AEntity(int const x, int const y, char const symbol);
+	AEntity(int const x, int const y, unsigned char const symbol);
 	virtual ~AEntity(void);
 	
 	virtual void				update(Board *board) = 0;
 
 	int							getPosX(void) const;
 	int							getPosY(void) const;
-	char						getSymbol(void) const;
+	unsigned char				getSymbol(void) const;
 	int							getAttributes(void) const;
 	int							getForegroundColor(void) const;
 	int							getBackgroundColor(void) const;
@@ -25,7 +25,7 @@ public:
 
 	virtual void				setPosX(int x);
 	virtual void				setPosY(int y);
-	void						setSymbol(char symbol);
+	void						setSymbol(unsigned char symbol);
 
 	void						move(int x, int y, Board *board);
 
@@ -33,7 +33,7 @@ protected:
 
 	int							_posX;
 	int							_posY;
-	char						_symbol;
+	unsigned char				_symbol;
 	int							_attributes;
 	int							_foregroundColor;
 	int							_backgroundColor;

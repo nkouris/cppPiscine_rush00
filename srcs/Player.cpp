@@ -2,7 +2,7 @@
 #include "Game.hpp"
 # include <ncurses.h>
 
-Player::Player(int const x, int const y, char const symbol) :
+Player::Player(int const x, int const y, unsigned char const symbol) :
 	AEntity(x, y, symbol)
 {
 	this->_attributes = A_BOLD;
