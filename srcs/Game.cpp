@@ -170,10 +170,3 @@ void				Game::_updateInfoWindow(void) const
 
 
 
-
-
-
-
-
-
-
