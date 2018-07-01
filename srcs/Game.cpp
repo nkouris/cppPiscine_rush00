@@ -142,6 +142,9 @@ void				Game::_updateInfoWindow(void) const
 
 void				Game::_generateScenery(void)
 {
+	int	x, y, moveSpeed;
+
+	x = 
 }
 
 
