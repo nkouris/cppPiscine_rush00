@@ -6,7 +6,7 @@
 class	AEnemy : public AMoving
 {
 	public:
-		AEnemy(int const x, int const y, unsigned char const symbol, int const moveSpeed);
+		AEnemy(int const x, int const y, unsigned int const symbol, int const moveSpeed);
 		virtual ~AEnemy(void);
 
 		virtual void		update(Board *board) = 0;

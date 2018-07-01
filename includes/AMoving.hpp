@@ -11,7 +11,7 @@ class AMoving : public AEntity
 {
 public:
 
-	AMoving(int const x, int const y, unsigned char const symbol, int const moveSpeed);
+	AMoving(int const x, int const y, unsigned int const symbol, int const moveSpeed);
 	virtual ~AMoving(void);
 
 	virtual void	movePattern(Board *board) = 0;

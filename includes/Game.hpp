@@ -2,6 +2,7 @@
 # define GAME_HPP
 
 # include <iostream>
+# include <locale.h>
 # include <ncurses.h>
 # include <unistd.h>
 # include "Player.hpp"

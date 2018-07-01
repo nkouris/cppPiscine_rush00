@@ -7,7 +7,7 @@ class Player : public AEntity
 {
 public:
 
-	Player(int const x, int const y, unsigned char const symbol);
+	Player(int const x, int const y, unsigned int const symbol);
 	~Player(void);
 
 	void				setPosX(int x);

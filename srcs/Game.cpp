@@ -8,6 +8,7 @@ const int	Game::INFO_WINDOW_HEIGHT = 30;
 Game::Game(void)
 {
 	std::srand(time(0));
+	setlocale(LC_ALL, "");
 	initscr();
 	raw();
 	keypad(stdscr, TRUE);
@@ -23,11 +24,11 @@ Game::Game(void)
 	this->_board = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 	this->_sceneBoard = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 	
-	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, 'A');
+	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, L'🍔');
 	this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
 	
 
-	this->_board->setCell(GAME_WINDOW_WIDTH / 2, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2, 5, '%', 2));
+	this->_board->setCell(GAME_WINDOW_WIDTH / 2, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2 + 1, 5, '%', 3));
 	
 
 	this->_isGameOver = false;
@@ -60,7 +61,7 @@ void				Game::run(void)
 	{
 		usleep(25000);
 		this->_processInput();
-//		this->_update();	// disabled for debugging; press 't' to run update once
+	//	this->_update();	// disabled for debugging; press 't' to run update once
 		this->_render();
 	}
 }
@@ -89,7 +90,7 @@ void				Game::_processInput(void)
 			Game::playSound("sounds/laser_1b.wav");
 			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY() - 1,
 	//			new BulletKnight(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP, LEFT));
-				new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 5, UP));
+				new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, L'🍟', 5, UP));
 			break;
 		case ('q'):
 			this->_isGameOver = true;
@@ -160,6 +161,7 @@ void				Game::_updateGameWindow(void) const
 void				Game::_updateInfoWindow(void) const
 {
 	wclear(this->_infoWindow);
+
 
 	mvwprintw(this->_infoWindow, 1, 1, "%s:\t%llu", "Time", this->_time);
 	mvwprintw(this->_infoWindow, 2, 1, "%s:\t%llu", "Score", this->_score);

@@ -7,7 +7,7 @@ class Bullet : public AMoving
 {
 public:
 
-	Bullet(int const x, int const y, unsigned char const symbol, int const moveSpeed, Direction direction);
+	Bullet(int const x, int const y, unsigned int const symbol, int const moveSpeed, Direction direction);
 	~Bullet(void);
 
 	void			update(Board *board);

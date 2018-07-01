@@ -2,13 +2,10 @@
 #include "Game.hpp"
 # include <ncurses.h>
 
-Player::Player(int const x, int const y, unsigned char const symbol) :
+Player::Player(int const x, int const y, unsigned int const symbol) :
 	AEntity(x, y, symbol)
 {
-	this->_attributes = A_BOLD;
-	this->_foregroundColor = COLOR_RED;
-	this->_backgroundColor = COLOR_GREEN;
-	this->_colorCode = PlayerColorCode;
+	
 }
 
 Player::~Player(void) { }

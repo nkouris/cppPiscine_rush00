@@ -6,7 +6,7 @@
 class	EnemyTypeB : public AEnemy
 {
 	public:
-		EnemyTypeB(int const x, int const y, unsigned char const symbol, int const moveSpeed);
+		EnemyTypeB(int const x, int const y, unsigned int const symbol, int const moveSpeed);
 		~EnemyTypeB(void);
 
 		void	movePattern(Board *board);
