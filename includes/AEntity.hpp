@@ -17,6 +17,7 @@ enum ColorCode
 };
 
 class Board;
+class Game;
 
 class AEntity
 {
@@ -42,6 +43,7 @@ public:
 
 protected:
 
+	Game						*_game;
 	int							_posX;
 	int							_posY;
 	unsigned int				_symbol;

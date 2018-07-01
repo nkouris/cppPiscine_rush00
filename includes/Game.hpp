@@ -32,6 +32,7 @@ public:
 	~Game(void);
 
 	void						run(void);
+	void						addScore(unsigned long long inc);
 
 private:
 

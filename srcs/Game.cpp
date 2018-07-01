@@ -1,9 +1,9 @@
 #include "Game.hpp"
 
-const int	Game::GAME_WINDOW_WIDTH = 30;
-const int	Game::GAME_WINDOW_HEIGHT = 30;
-const int	Game::INFO_WINDOW_WIDTH = 30;
-const int	Game::INFO_WINDOW_HEIGHT = 30;
+const int	Game::GAME_WINDOW_WIDTH = 40;
+const int	Game::GAME_WINDOW_HEIGHT = 40;
+const int	Game::INFO_WINDOW_WIDTH = 40;
+const int	Game::INFO_WINDOW_HEIGHT = 40;
 
 Game::Game(void)
 {
@@ -24,11 +24,11 @@ Game::Game(void)
 	this->_board = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 	this->_sceneBoard = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 	
-	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, L'🍔');
+	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT * 3 / 4, L'🍔');
 	this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
 	
 
-	this->_board->setCell(GAME_WINDOW_WIDTH / 2, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2 + 1, 5, '%', 3));
+	this->_board->setCell(GAME_WINDOW_WIDTH / 2 + 1, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2 + 1, 5, '%', 3, this));
 	
 
 	this->_isGameOver = false;
@@ -66,6 +66,11 @@ void				Game::run(void)
 	}
 }
 
+void					Game::addScore(unsigned long long inc)
+{
+	this->_score += inc;
+}
+
 // -----------------------------------------------------------------------------------
 // PROCESS_INPUT
 // -----------------------------------------------------------------------------------
@@ -89,8 +94,7 @@ void				Game::_processInput(void)
 		case (' '):
 			Game::playSound("sounds/laser_1b.wav");
 			this->_board->setCell(this->_player->getPosX(), this->_player->getPosY() - 1,
-	//			new BulletKnight(this->_player->getPosX(), this->_player->getPosY() - 1, '*', 10, UP, LEFT));
-				new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, L'🍟', 5, UP));
+				new Bullet(this->_player->getPosX(), this->_player->getPosY() - 1, L'💣', 5, UP));
 			break;
 		case ('q'):
 			this->_isGameOver = true;
@@ -162,6 +166,7 @@ void				Game::_updateInfoWindow(void) const
 {
 	wclear(this->_infoWindow);
 
+//	this->_board->debugAllCells(this->_infoWindow);
 
 	mvwprintw(this->_infoWindow, 1, 1, "%s:\t%llu", "Time", this->_time);
 	mvwprintw(this->_infoWindow, 2, 1, "%s:\t%llu", "Score", this->_score);

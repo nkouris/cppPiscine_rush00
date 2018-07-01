@@ -1,6 +1,8 @@
 #include "EnemyTypeB.hpp"
+#include "Game.hpp"
 
-EnemyTypeB::EnemyTypeB(int const x, int const y, unsigned int const symbol, int const moveSpeed) : AEnemy(x, y, symbol, moveSpeed)
+EnemyTypeB::EnemyTypeB(int const x, int const y, unsigned int const symbol, int const moveSpeed, Game *game)
+	: AEnemy(x, y, symbol, moveSpeed, game)
 {
 	this->_attributes = A_BOLD;
 	this->_foregroundColor = COLOR_CYAN;
@@ -10,7 +12,11 @@ EnemyTypeB::EnemyTypeB(int const x, int const y, unsigned int const symbol, int 
 	this->_direction = DOWN;
 }
 
-EnemyTypeB::~EnemyTypeB(void) { }
+EnemyTypeB::~EnemyTypeB(void)
+{
+	if (this->_posY != Game::GAME_WINDOW_HEIGHT)
+		this->_game->addScore(10);
+}
 
 void	EnemyTypeB::update(Board *board)
 {
@@ -25,5 +31,10 @@ void	EnemyTypeB::update(Board *board)
 void	EnemyTypeB::movePattern(Board *board)
 {
 	this->_memory = 0;
-	this->move(this->_posX, this->_posY - 1, board);
+	this->move(this->_posX, this->_posY + 1, board);
+}
+
+void	EnemyTypeB::shoot(void)
+{
+
 }

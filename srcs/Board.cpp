@@ -83,3 +83,17 @@ void				Board::renderAllCells(WINDOW *win)
 		}
 	}
 }
+
+void				Board::debugAllCells(WINDOW *win)
+{
+	for (int i = 0; i < this->_width * this->_height; i++)
+	{
+		int x = i % this->_width;
+		int y = i / this->_width;
+
+		if (this->_cells[i])
+			mvwaddch(win, y + 1, x + 1, '1');
+		//else
+		//	mvwaddch(win, y + 1, x + 1, '0');
+	}
+}
