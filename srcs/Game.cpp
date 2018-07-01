@@ -25,7 +25,11 @@ Game::Game(void)
 	
 	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, 'A');
 	this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
-	this->_board->setCell(GAME_WINDOW_WIDTH / 2, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2, 5, '%', 6));
+	
+
+	this->_board->setCell(GAME_WINDOW_WIDTH / 2, 5, new EnemyTypeB(GAME_WINDOW_WIDTH / 2, 5, '%', 2));
+	
+
 	this->_isGameOver = false;
 	this->_time = 0;
 	this->_score = 0;

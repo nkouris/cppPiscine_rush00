@@ -14,6 +14,7 @@ EnemyTypeB::~EnemyTypeB(void) { }
 
 void	EnemyTypeB::movePattern(Board *board)
 {
+	/*
 	if (this->_memory == 3)
 	{
 		this->_direction == DOWN ? this->_direction = UP :
@@ -24,7 +25,9 @@ void	EnemyTypeB::movePattern(Board *board)
 		this->_memory++;
 	this->_posY++;
 	this->move(this->_posX, this->_posY, board);
-
+	*/
+	this->_memory = 0;
+	this->move(this->_posX, this->_posY + 1, board);
 }
 
 void	EnemyTypeB::update(Board *board)
