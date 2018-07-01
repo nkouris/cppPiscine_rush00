@@ -36,6 +36,7 @@ private:
 
 	Player						*_player;
 	Board						*_board;
+	Board						*_sceneBoard;
 
 	bool						_isGameOver;
 	unsigned long long			_time;
@@ -53,6 +54,7 @@ private:
 	void						_render(void) const;
 	void						_updateGameWindow(void) const;
 	void						_updateInfoWindow(void) const;
+	void						_generateScenery(void);
 
 	
 

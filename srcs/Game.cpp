@@ -8,11 +8,11 @@ const int	Game::INFO_WINDOW_HEIGHT = 30;
 
 Game::Game(void)
 {
+	std::srand(time(0));
 	initscr();
 	raw();
-//	halfdelay(1);	// this blocks getch() up to 1/10 second, or none at all if user just holds down a keystroke
-	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
+	nodelay(stdscr, TRUE);
 	noecho();
 	curs_set(0);
 	refresh();
@@ -22,6 +22,8 @@ Game::Game(void)
 
 	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, 'A');
 	this->_board = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
+	this->_sceneBoard = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
+	this->_generateScenery();
 	this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
 
 	this->_isGameOver = false;
@@ -118,6 +120,7 @@ void				Game::_updateGameWindow(void) const
 {
 	wclear(this->_gameWindow);
 
+	this->_sceneBoard->renderAllCells(this->_gameWindow);
 	this->_board->renderAllCells(this->_gameWindow);
 	
 	wborder(this->_gameWindow, '|', '|', '-', '-', '+', '+', '+', '+');
@@ -137,6 +140,9 @@ void				Game::_updateInfoWindow(void) const
 	wrefresh(this->_infoWindow);
 }
 
+void				Game::_generateScenery(void)
+{
+}
 
 
 
