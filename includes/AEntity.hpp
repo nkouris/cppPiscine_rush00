@@ -43,7 +43,6 @@ public:
 
 protected:
 
-	Game						*_game;
 	int							_posX;
 	int							_posY;
 	unsigned int				_symbol;
@@ -51,8 +50,6 @@ protected:
 	int							_foregroundColor;
 	int							_backgroundColor;
 	unsigned char				_colorCode;
-
-
 
 private:
 	

@@ -7,22 +7,33 @@ class Player : public AEntity
 {
 public:
 
-	Player(int const x, int const y, unsigned int const symbol);
+	Player(int const x, int const y, Game *game);
 	~Player(void);
 
 	void				setPosX(int x);
 	void				setPosY(int y);
 
+	int					getLives(void) const;
+	int					getBombs(void) const;
+
 	void				update(Board *board);
 
-	void				moveUp(void);
-	void				moveDown(void);
-	void				moveLeft(void);
-	void				moveRight(void);
+	void				shoot(void);
+	void				bomb(void);
+
+	void				killMe(void);
+
+//	static void				operator delete(void *ptr);
 
 private:
+
+	Game *				_game;
 	
-	unsigned char		_symbol;
+	int					_shotCooldown;
+	int					_cooldown;
+
+	int					_lives;
+	int					_bombs;
 
 	Player(Player const &src);
 	Player &		operator=(Player const &rhs);

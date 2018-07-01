@@ -8,7 +8,7 @@ INCLUDES = includes
 
 SRCSDIR = srcs/
 SRCS = AEntity.cpp AMoving.cpp Board.cpp Bullet.cpp BulletKnight.cpp Game.cpp Player.cpp main.cpp \
-	   Scene.cpp EnemyTypeB.cpp AEnemy.cpp
+	   Scene.cpp EnemyTypeB.cpp AEnemy.cpp EnemyFace.cpp Poop.cpp
 
 OBJDIR = objs/
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.cpp=.o))

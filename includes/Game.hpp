@@ -12,6 +12,8 @@
 # include "Scene.hpp"
 # include "BulletKnight.hpp"
 # include "EnemyTypeB.hpp"
+# include "EnemyFace.hpp"
+
 
 # define MAX(a, b)				((a) > (b) ? (a) : (b))
 # define MIN(a, b)				((a) < (b) ? (a) : (b))
@@ -34,6 +36,12 @@ public:
 	void						run(void);
 	void						addScore(unsigned long long inc);
 
+	Board *						getBoard(void) const;
+	Board *						getSceneBoard(void) const;
+	Player *					getPlayer(void) const;
+
+	void						setGameOver(void);
+
 private:
 
 	WINDOW *					_gameWindow;
@@ -46,8 +54,6 @@ private:
 	bool						_isGameOver;
 	unsigned long long			_time;
 	unsigned long long			_score;
-	unsigned int				_lives;
-	unsigned int				_bombs;
 
 	Game(Game const &src);
 	Game &						operator=(Game const &rhs);
@@ -60,7 +66,7 @@ private:
 	void						_updateGameWindow(void) const;
 	void						_updateInfoWindow(void) const;
 	void						_generateScenery(void);
-//	void						_generateEnemies(void);
+	void						_generateEnemies(void);
 
 	
 

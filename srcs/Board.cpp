@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include "Player.hpp"
 
 Board::Board(int const width, int const height)
 {
@@ -36,8 +37,19 @@ void				Board::setCell(int x, int y, AEntity *e)
 		int			i = this->_width * y + x;
 		if (this->_cells[i])
 		{
-			delete this->_cells[i];
-			delete e;
+			Player *p = NULL;
+
+			if ((p = dynamic_cast<Player *>(this->_cells[i])))
+				p->killMe();
+			else	
+				delete this->_cells[i];
+
+			if (!p && (p = dynamic_cast<Player *>(e)))
+				p->killMe();
+			else
+				delete e;
+//			delete this->_cells[i];
+//			delete e;
 			this->_cells[i] = NULL;
 		}
 		else
@@ -45,7 +57,6 @@ void				Board::setCell(int x, int y, AEntity *e)
 	}
 	else
 		delete e;
-
 }
 
 void				Board::clearCell(int x, int y)
@@ -70,16 +81,14 @@ void				Board::renderAllCells(WINDOW *win)
 	{
 		if (this->_cells[i])
 		{
-			unsigned char colorNum = this->_cells[i]->getColorCode();
-			init_pair(colorNum, this->_cells[i]->getForegroundColor(), this->_cells[i]->getBackgroundColor());
-					
-			//mvwaddch(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, this->_cells[i]->getSymbol() | COLOR_PAIR(colorNum));
-			int attr = COLOR_PAIR(colorNum) | this->_cells[i]->getAttributes();
+			init_pair(this->_cells[i]->getColorCode(), this->_cells[i]->getForegroundColor(), this->_cells[i]->getBackgroundColor());
+								
+			int attr = COLOR_PAIR(this->_cells[i]->getColorCode()) | this->_cells[i]->getAttributes();
 
+//			mvwaddch(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, this->_cells[i]->getSymbol() | COLOR_PAIR(colorNum));
 			wattron(win, attr);
 			mvwprintw(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, "%lc", this->_cells[i]->getSymbol());
-			wattroff(win, attr);
-			
+			wattroff(win, attr);			
 		}
 	}
 }
@@ -93,7 +102,5 @@ void				Board::debugAllCells(WINDOW *win)
 
 		if (this->_cells[i])
 			mvwaddch(win, y + 1, x + 1, '1');
-		//else
-		//	mvwaddch(win, y + 1, x + 1, '0');
 	}
 }

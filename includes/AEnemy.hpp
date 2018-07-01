@@ -2,11 +2,10 @@
 # define AENEMY_HPP
 
 # include "AMoving.hpp"
-//# include "Game.hpp"
 
 class Game;
 
-class	AEnemy : public AMoving
+class AEnemy : public AMoving
 {
 public:
 
@@ -15,12 +14,17 @@ public:
 
 	virtual void		update(Board *board) = 0;
 	virtual void		movePattern(Board *board) = 0;
-
 	virtual void		shoot(void) = 0;
 
 protected:
 
 	Game *				_game;
+
+private:
+
+	AEnemy(AEnemy const &src);
+	AEnemy &			operator=(AEnemy const &rhs);
+
 
 };
 
