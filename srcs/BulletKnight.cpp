@@ -22,5 +22,4 @@ void			BulletKnight::movePattern(Board *board)
 		else
 			this->move(this->_posX + 1, this->_posY + 1, board);
 	}
-
 }

@@ -19,11 +19,11 @@ Game::Game(void)
 
 	this->_gameWindow = newwin(GAME_WINDOW_HEIGHT + 2, GAME_WINDOW_WIDTH + 2, 0, 0);
 	this->_infoWindow = newwin(INFO_WINDOW_HEIGHT + 2, INFO_WINDOW_WIDTH + 2, 0, GAME_WINDOW_WIDTH + 2);
-
-	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, 'A');
+	
 	this->_board = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 	this->_sceneBoard = new Board(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
-	this->_generateScenery();
+	
+	this->_player = new Player(GAME_WINDOW_WIDTH / 2, GAME_WINDOW_HEIGHT / 2, 'A');
 	this->_board->setCell(this->_player->getPosX(), this->_player->getPosY(), this->_player);
 
 	this->_isGameOver = false;
@@ -103,7 +103,15 @@ void				Game::_processInput(void)
 
 void				Game::_update(void)
 {
+	this->_generateScenery();
+	
+	this->_sceneBoard->updateAllCells();
 	this->_board->updateAllCells();
+}
+
+void				Game::_generateScenery(void)
+{
+
 }
 
 // -----------------------------------------------------------------------------------
@@ -140,9 +148,7 @@ void				Game::_updateInfoWindow(void) const
 	wrefresh(this->_infoWindow);
 }
 
-void				Game::_generateScenery(void)
-{
-}
+
 
 
 
