@@ -5,6 +5,7 @@
 # include <locale.h>
 # include <ncurses.h>
 # include <unistd.h>
+# include <chrono>
 # include "Player.hpp"
 # include "AEntity.hpp"
 # include "Bullet.hpp"
@@ -51,9 +52,9 @@ private:
 	Board						*_board;
 	Board						*_sceneBoard;
 
-	bool						_isGameOver;
-	unsigned long long			_time;
-	unsigned long long			_score;
+	bool										_isGameOver;
+	unsigned long long							_score;
+	std::chrono::steady_clock::time_point		_start;
 
 	Game(Game const &src);
 	Game &						operator=(Game const &rhs);

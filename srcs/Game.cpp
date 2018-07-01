@@ -17,6 +17,8 @@ Game::Game(void)
 	curs_set(0);
 	start_color();
 	refresh();
+
+	_start = std::chrono::steady_clock::now();
 	
 	this->_gameWindow = newwin(GAME_WINDOW_HEIGHT + 2, GAME_WINDOW_WIDTH + 2, 0, 0);
 	this->_infoWindow = newwin(INFO_WINDOW_HEIGHT + 2, INFO_WINDOW_WIDTH + 2, 0, GAME_WINDOW_WIDTH + 3);
@@ -33,7 +35,6 @@ Game::Game(void)
 //	this->_board->setCell(e->getPosX(), e->getPosY(), e);
 	
 	this->_isGameOver = false;
-	this->_time = 0;
 	this->_score = 0;
 }
 
@@ -57,10 +58,10 @@ void				Game::run(void)
 {
 	while (this->_isGameOver == false)
 	{
-		usleep(25000);
 		this->_processInput();
 		this->_update();	// disabled for debugging; press 't' to run update once
 		this->_render();
+		usleep(25000);
 	}
 
 	nodelay(stdscr, FALSE);
@@ -149,6 +150,7 @@ void				Game::_generateScenery(void)
 
 void				Game::_generateEnemies(void)
 {
+/* switch statement for difficulty selection */
 	if (std::rand() % 100 >= 5) return;
 
 	int				x, y;
@@ -197,10 +199,16 @@ void				Game::_updateGameWindow(void) const
 void				Game::_updateInfoWindow(void) const
 {
 	wclear(this->_infoWindow);
+	std::chrono::steady_clock::time_point mark = std::chrono::steady_clock::now();
+
+	std::string minutesTime =
+		std::to_string(std::chrono::duration_cast<std::chrono::minutes>(mark - _start).count());
+	std::string secondsTime =
+		std::to_string(std::chrono::duration_cast<std::chrono::seconds>(mark - _start).count());
 
 //	this->_board->debugAllCells(this->_infoWindow);
 
-	mvwprintw(this->_infoWindow, 1, 1, "Time:\t%llu", this->_time);
+	mvwprintw(this->_infoWindow, 1, 1, "Time:\t%02s:%02s", minutesTime.data(), secondsTime.data());
 	mvwprintw(this->_infoWindow, 2, 1, "Score:\t%llu", this->_score);
 	mvwprintw(this->_infoWindow, 4, 1, "Lives:\t%u", this->_isGameOver ? 0 : this->_player->getLives());
 	mvwprintw(this->_infoWindow, 5, 1, "Bombs:\t%u", this->_isGameOver ? 0 : this->_player->getBombs());
