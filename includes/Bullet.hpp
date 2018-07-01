@@ -3,7 +3,7 @@
 
 # include "AMoving.hpp"
 
-enum Direction;
+
 
 class Bullet : public AMoving
 {

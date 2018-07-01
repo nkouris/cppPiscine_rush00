@@ -1,7 +1,15 @@
 #include "Scene.hpp"
+#include <ncurses.h>
 
-Scene::Scene(int x, int y, char const symbol, int const moveSpeed) : AMoving(x, y, symbol, moveSpeed)
+Scene::Scene(int const x, int const y, char const symbol, int const moveSpeed) :
+	AMoving(x, y, symbol, moveSpeed)
 {
+	/*
+//	this->_attributes = A_NORMAL;
+	this->_foregroundColor = COLOR_MAGENTA;
+	this->_backgroundColor = COLOR_BLUE;
+	this->_symbol = 'F';
+	*/
 }
 
 Scene::~Scene(void)

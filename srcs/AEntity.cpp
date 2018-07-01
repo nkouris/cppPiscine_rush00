@@ -7,6 +7,7 @@ AEntity::AEntity(int const x, int const y, char const symbol) :
 	this->_attributes = A_BOLD;
 	this->_foregroundColor = COLOR_RED;
 	this->_backgroundColor = COLOR_GREEN;
+	this->_colorCode = PlayerColorCode;
 }
 
 AEntity::~AEntity(void) { }
@@ -17,6 +18,7 @@ char						AEntity::getSymbol(void) const { return (this->_symbol); }
 int							AEntity::getAttributes(void) const { return (this->_attributes); }
 int							AEntity::getForegroundColor(void) const { return (this->_foregroundColor); }
 int							AEntity::getBackgroundColor(void) const { return (this->_backgroundColor); }
+unsigned char				AEntity::getColorCode(void) const { return (this->_colorCode); }
 
 void						AEntity::setPosX(int x) { this->_posX = x; }
 void						AEntity::setPosY(int y) { this->_posY = y; }

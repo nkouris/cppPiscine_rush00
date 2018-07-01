@@ -20,7 +20,6 @@ public:
 	void				moveLeft(void);
 	void				moveRight(void);
 
-	
 private:
 	
 	char			_symbol;

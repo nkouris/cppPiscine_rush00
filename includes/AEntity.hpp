@@ -3,6 +3,8 @@
 
 # include <ncurses.h>
 
+enum ColorCode { PlayerColorCode = 1, BulletColorCode };
+
 class Board;
 
 class AEntity
@@ -19,6 +21,7 @@ public:
 	int							getAttributes(void) const;
 	int							getForegroundColor(void) const;
 	int							getBackgroundColor(void) const;
+	unsigned char				getColorCode(void) const;
 
 	virtual void				setPosX(int x);
 	virtual void				setPosY(int y);
@@ -34,6 +37,9 @@ protected:
 	int							_attributes;
 	int							_foregroundColor;
 	int							_backgroundColor;
+	unsigned char				_colorCode;
+
+
 
 private:
 	

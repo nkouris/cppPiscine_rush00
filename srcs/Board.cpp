@@ -6,7 +6,7 @@ Board::Board(int const width, int const height)
 	this->_height = height;
 	this->_cells = new AEntity*[width * height];
 	for (int i = 0; i < this->_width * this->_height; i++)
-		this->_cells[i] = NULL;	
+		this->_cells[i] = NULL;
 }
 
 Board::~Board(void)
@@ -70,12 +70,15 @@ void				Board::renderAllCells(WINDOW *win)
 	{
 		if (this->_cells[i])
 		{
-			wattron(win, this->_cells[i]->getAttributes());
-			init_pair(1, this->_cells[i]->getForegroundColor(), this->_cells[i]->getBackgroundColor());
-			wattron(win, COLOR_PAIR(1));
+			unsigned char colorNum = this->_cells[i]->getColorCode();
+			init_pair(colorNum, this->_cells[i]->getForegroundColor(), this->_cells[i]->getBackgroundColor());
+					
+			mvwaddch(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, this->_cells[i]->getSymbol() | COLOR_PAIR(colorNum));
+			/*
+			wattron(win, COLOR_PAIR(colorNum));
 			mvwprintw(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, "%c", this->_cells[i]->getSymbol());
-			wattroff(win, COLOR_PAIR(1));
-			wattroff(win, this->_cells[i]->getAttributes());
+			wattroff(win, COLOR_PAIR(colorNum));
+			*/
 		}
 	}
 }

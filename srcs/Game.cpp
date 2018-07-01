@@ -16,7 +16,7 @@ Game::Game(void)
 	curs_set(0);
 	start_color();
 	refresh();
-
+	
 	this->_gameWindow = newwin(GAME_WINDOW_HEIGHT + 2, GAME_WINDOW_WIDTH + 2, 0, 0);
 	this->_infoWindow = newwin(INFO_WINDOW_HEIGHT + 2, INFO_WINDOW_WIDTH + 2, 0, GAME_WINDOW_WIDTH + 2);
 	
@@ -39,7 +39,9 @@ Game::~Game(void)
 	if (this->_infoWindow) delwin(this->_infoWindow);
 	endwin();
 
-	delete _board;
+	delete this->_sceneBoard;
+	delete this->_board;
+
 }
 
 void				Game::playSound(std::string soundFile)
@@ -54,7 +56,7 @@ void				Game::run(void)
 	{
 		usleep(25000);
 		this->_processInput();
-		this->_update();	// disabled for debugging; press 't' to run update once
+	//	this->_update();	// disabled for debugging; press 't' to run update once
 		this->_render();
 	}
 }
@@ -67,7 +69,6 @@ void				Game::_processInput(void)
 {
 	switch (getch())
 	{
-		
 		case (KEY_UP):
 			this->_player->move(this->_player->getPosX(), this->_player->getPosY() - 1, this->_board);
 			break;
@@ -119,7 +120,7 @@ void				Game::_generateScenery(void)
 	moveSpeed = std::rand() % 20;
 	while (nobjects--)
 	{
-		temp = new Scene(x, 0, '.', moveSpeed);
+		temp = new Scene(x, 0, 'A', moveSpeed);
 		this->_sceneBoard->setCell(temp->getPosX(), temp->getPosY(), temp);
 	}
 }
