@@ -18,6 +18,7 @@ private:
 	Direction			_knightDirection;
 
 	BulletKnight(BulletKnight const &src);
+	BulletKnight(void);
 	BulletKnight &		operator=(BulletKnight const &src);
 
 };

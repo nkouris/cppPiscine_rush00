@@ -19,6 +19,7 @@ protected:
 
 private:
 
+	Bullet(void);
 	Bullet(Bullet const &src);
 	Bullet &		operator=(Bullet const &src);
 

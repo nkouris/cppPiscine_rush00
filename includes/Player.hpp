@@ -35,6 +35,7 @@ private:
 	int					_bombs;
 
 	Player(Player const &src);
+	Player(void);
 	Player &		operator=(Player const &rhs);
 
 };

@@ -69,6 +69,9 @@ private:
 	void						_updateInfoWindow(void) const;
 	void						_generateScenery(void);
 	void						_generateEnemies(void);
+	
+	Game &		operator=(Game const &src);
+	Game(Game const &src);
 
 	
 

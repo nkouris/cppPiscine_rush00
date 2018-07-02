@@ -22,6 +22,7 @@ protected:
 private:
 
 	AEnemy(AEnemy const &src);
+	AEnemy(void);
 	AEnemy &			operator=(AEnemy const &rhs);
 
 

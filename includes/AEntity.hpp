@@ -54,6 +54,7 @@ protected:
 private:
 	
 	AEntity(AEntity const &src);
+	AEntity(void);
 	AEntity &					operator=(AEntity const &rhs);
 
 };

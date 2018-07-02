@@ -25,6 +25,7 @@ protected:
 private:
 	
 	AMoving(AMoving const &src);
+	AMoving(void);
 	AMoving &		operator=(AMoving const &rhs);
 
 };
