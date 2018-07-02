@@ -14,6 +14,7 @@
 # include "BulletKnight.hpp"
 # include "EnemyFace.hpp"
 # include "EnemyCop.hpp"
+# include "WomanManager.hpp"
 
 # define MAX(a, b)				((a) > (b) ? (a) : (b))
 # define MIN(a, b)				((a) < (b) ? (a) : (b))

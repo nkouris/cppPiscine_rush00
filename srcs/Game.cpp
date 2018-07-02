@@ -65,6 +65,11 @@ Game::Game(void)
 	};
 
 	Game::playSound(bgm[std::rand() % 23]);
+
+	// int x = 0;
+	// int y = GAME_WINDOW_HEIGHT / 2;
+	// WomanManager *w = new WomanManager(x, y, this);
+	// this->_board->setCell(x, y, w);
 }
 
 Game::~Game(void)
@@ -180,6 +185,22 @@ void				Game::_generateScenery(void)
 
 void				Game::_generateEnemies(void)
 {
+	// spawn Woman section
+	if (std::rand() % 100 < 2)
+	{
+		int x = 0;
+		int y = std::rand() % (GAME_WINDOW_HEIGHT - 3);
+
+		if (this->_board->getCell(x, y) == NULL &&
+			this->_board->getCell(x, y + 1) == NULL &&
+			this->_board->getCell(x, y + 2) == NULL &&
+			this->_board->getCell(x, y + 3) == NULL)
+		{
+			WomanManager *w = new WomanManager(x, y, this);
+			this->_board->setCell(x, y, w);
+		}
+	}
+	
 	// spawn EnemyCop section
 	if (std::rand() % 100 < 2)
 	{
@@ -215,9 +236,8 @@ void				Game::_generateEnemies(void)
 			EnemyFace *e = new EnemyFace(x, y, this);
 			this->_board->setCell(x, y, e);
 		}
-	}	
+	}
 }
-
 
 // -----------------------------------------------------------------------------------
 // RENDER
@@ -249,7 +269,7 @@ void				Game::_updateInfoWindow(void) const
 	std::string minutesTime =
 		std::to_string(std::chrono::duration_cast<std::chrono::minutes>(mark - _start).count());
 	std::string secondsTime =
-		std::to_string(std::chrono::duration_cast<std::chrono::seconds>(mark - _start).count());
+		std::to_string(std::chrono::duration_cast<std::chrono::seconds>(mark - _start).count() % 60);
 
 //	this->_board->debugAllCells(this->_infoWindow);
 

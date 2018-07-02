@@ -11,6 +11,7 @@ SRCS = AEntity.cpp AEnemy.cpp AMoving.cpp \
 		Board.cpp Bullet.cpp BulletKnight.cpp \
 		EnemyCop.cpp EnemyFace.cpp \
 		Game.cpp Player.cpp Poop.cpp Scene.cpp \
+		WomanManager.cpp WomanPart.cpp \
 		main.cpp
 
 OBJDIR = objs/
