@@ -115,26 +115,31 @@ void				Game::setGameOver(void) { this->_isGameOver = true; }
 
 void				Game::_processInput(void)
 {
+
 	switch (getch())
 	{
 		case (KEY_UP):
-			this->_player->move(this->_player->getPosX(), this->_player->getPosY() - 1, this->_board);
+			if (!this->_isGameOver)
+				this->_player->move(this->_player->getPosX(), this->_player->getPosY() - 1, this->_board);
 			break;
 		case (KEY_DOWN):
-			this->_player->move(this->_player->getPosX(), this->_player->getPosY() + 1, this->_board);
+			if (!this->_isGameOver)
+				this->_player->move(this->_player->getPosX(), this->_player->getPosY() + 1, this->_board);
 			break;
 		case (KEY_LEFT):
-			this->_player->move(this->_player->getPosX() - 1, this->_player->getPosY(), this->_board);
+			if (!this->_isGameOver)
+				this->_player->move(this->_player->getPosX() - 1, this->_player->getPosY(), this->_board);
 			break;
 		case (KEY_RIGHT):
-			this->_player->move(this->_player->getPosX() + 1, this->_player->getPosY(), this->_board);
+			if (!this->_isGameOver)
+				this->_player->move(this->_player->getPosX() + 1, this->_player->getPosY(), this->_board);
 			break;
 		case (' '):
-			this->_player->shoot();
+			if (!this->_isGameOver)	this->_player->shoot();
 			break;
 		case ('b'):
 		case ('B'):
-			this->_player->bomb();
+			if (!this->_isGameOver)	this->_player->bomb();
 			break;
 		case ('q'):
 		case ('Q'):
@@ -148,7 +153,6 @@ void				Game::_processInput(void)
 			break;
 	}
 }
-
 
 // -----------------------------------------------------------------------------------
 // UPDATE
