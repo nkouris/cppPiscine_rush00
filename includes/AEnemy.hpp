@@ -25,7 +25,6 @@ private:
 	AEnemy(void);
 	AEnemy &			operator=(AEnemy const &rhs);
 
-
 };
 
 #endif

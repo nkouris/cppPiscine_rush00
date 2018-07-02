@@ -29,6 +29,7 @@ void			EnemyCop::update(Board *board)
 		this->_moveInc = 0;
 		this->_moveSpeed = 10 + std::rand() % 10 - 5;
 	}
+
 	if (std::rand() % 1000 < 10)
 		this->shoot();
 }
@@ -62,5 +63,3 @@ void			EnemyCop::shoot(void)
 	this->_game->getBoard()->setCell(b->getPosX(), b->getPosY(), b);
 	Game::playSound("sounds/whoosh.wav");
 }
-
-

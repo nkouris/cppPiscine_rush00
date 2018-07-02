@@ -10,7 +10,6 @@ public:
 	BulletKnight(int const x, int const y, unsigned int const symbol, int const moveSpeed, Direction direction, Direction knightDirection);
 	~BulletKnight(void);
 
-	
 	void				movePattern(Board *board);
 
 private:

@@ -4,7 +4,6 @@
 Bullet::Bullet(int const x, int const y, unsigned int const symbol, int const moveSpeed, Direction direction) :
 	AMoving(x, y, symbol, moveSpeed), _direction(direction) { }
 
-
 Bullet::~Bullet(void) { }
 
 void			Bullet::update(Board *board)

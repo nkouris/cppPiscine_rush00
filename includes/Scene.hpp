@@ -7,20 +7,21 @@
 class		Scene : public AMoving
 {
 public:
-	Scene(void);
+	
 	Scene(int const x, int const y);
 	~Scene(void);
 
-	void	movePattern(Board *board);
 	void	update(Board *board);
+	void	movePattern(Board *board);
 
 private:
 
 	int		_blinkRate;
 	int		_blinkInc;
 	
-	Scene&	operator=(Scene const & rhs);
+	Scene(void);
 	Scene(Scene const & src);
+	Scene&	operator=(Scene const & rhs);
 
 };
 

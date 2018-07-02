@@ -15,11 +15,6 @@ Scene::Scene(int const x, int const y) :
 
 Scene::~Scene(void) { }
 
-void		Scene::movePattern(Board *board)
-{
-	this->move(this->_posX, this->_posY + 1, board);
-}
-
 void		Scene::update(Board *board)
 {
 	this->_moveInc++;
@@ -38,4 +33,9 @@ void		Scene::update(Board *board)
 		this->_blinkRate = std::rand() % 5 + 5;
 		this->_blinkInc = 0;
 	}
+}
+
+void		Scene::movePattern(Board *board)
+{
+	this->move(this->_posX, this->_posY + 1, board);
 }

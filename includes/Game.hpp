@@ -15,7 +15,6 @@
 # include "EnemyFace.hpp"
 # include "EnemyCop.hpp"
 
-
 # define MAX(a, b)				((a) > (b) ? (a) : (b))
 # define MIN(a, b)				((a) < (b) ? (a) : (b))
 # define CLAMP(d, d_min, d_max)	(d = MIN(MAX(d_min, d), d_max))
@@ -52,8 +51,9 @@ private:
 	Board						*_board;
 	Board						*_sceneBoard;
 
-	bool										_isGameOver;
-	unsigned long long							_score;
+	bool						_isGameOver;
+	unsigned long long			_score;
+
 	std::chrono::steady_clock::time_point		_start;
 
 	Game(Game const &src);

@@ -88,7 +88,7 @@ void				Board::renderAllCells(WINDOW *win)
 								
 			int attr = COLOR_PAIR(this->_cells[i]->getColorCode()) | this->_cells[i]->getAttributes();
 
-//			mvwaddch(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, this->_cells[i]->getSymbol() | COLOR_PAIR(colorNum));
+//			mvwaddch(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, this->_cells[i]->getSymbol() | attr);
 			wattron(win, attr);
 			mvwprintw(win, this->_cells[i]->getPosY() + 1, this->_cells[i]->getPosX() + 1, "%lc", this->_cells[i]->getSymbol());
 			wattroff(win, attr);			

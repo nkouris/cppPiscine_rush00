@@ -145,10 +145,10 @@ void				Game::_processInput(void)
 		case ('Q'):
 			this->_isGameOver = true;
 			break;
-		case ('t'):
-		case ('T'):
-			this->_update();
-			break;
+		// case ('t'):
+		// case ('T'):
+		// 	this->_update();
+		// 	break;
 		default:
 			break;
 	}
@@ -168,26 +168,19 @@ void				Game::_update(void)
 
 void				Game::_generateScenery(void)
 {
-	//Scene			*temp = NULL;
-	int				x, nobjects;
-
-	nobjects = std::rand() % 4;
-	x = std::rand() % this->GAME_WINDOW_WIDTH;
-//	moveSpeed = std::rand() % 20;
-
-	while (nobjects--)
+	if (std::rand() % 5 != 0) return;
+	
+	int				numObjects = std::rand() % 4;
+	
+	while (numObjects--)
 	{
-		//temp = new Scene(x, 0, 'A', moveSpeed);
-		Scene *temp = new Scene(x, 0);
-		this->_sceneBoard->setCell(temp->getPosX(), temp->getPosY(), temp);
+		Scene *s = new Scene(std::rand() % GAME_WINDOW_WIDTH, 0);
+		this->_sceneBoard->setCell(s->getPosX(), s->getPosY(), s);
 	}
 }
 
 void				Game::_generateEnemies(void)
 {
-/* switch statement for difficulty selection */
-
-
 	// spawn EnemyCop section
 	if (std::rand() % 100 < 2)
 	{
@@ -200,8 +193,6 @@ void				Game::_generateEnemies(void)
 			this->_board->setCell(x, y, e);
 		}
 	}
-
-
 	
 	// spawn EnemyFace section
 	if (std::rand() % 100 < 5)
@@ -209,13 +200,13 @@ void				Game::_generateEnemies(void)
 		int				x, y;
 		if (std::rand() % 2)
 		{
-			// at top or bottom border
+			// spawn at top or bottom border
 			x = std::rand() % GAME_WINDOW_WIDTH;
 			y = (std::rand() % 2) ? 0 : GAME_WINDOW_HEIGHT - 1;
 		}
 		else
 		{
-			// at left or right border
+			// spawn at left or right border
 			x = (std::rand() % 2) ? 0 : GAME_WINDOW_WIDTH - 1;
 			y = std::rand() % GAME_WINDOW_HEIGHT;
 		}
@@ -225,9 +216,7 @@ void				Game::_generateEnemies(void)
 			EnemyFace *e = new EnemyFace(x, y, this);
 			this->_board->setCell(x, y, e);
 		}
-	}
-	
-	
+	}	
 }
 
 
@@ -306,26 +295,3 @@ void				Game::_updateInfoWindow(void) const
 	wborder(this->_infoWindow, '|', '|', '-', '-', '+', '+', '+', '+');
 	wrefresh(this->_infoWindow);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
