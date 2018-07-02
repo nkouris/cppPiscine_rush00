@@ -115,7 +115,6 @@ void				Game::setGameOver(void) { this->_isGameOver = true; }
 
 void				Game::_processInput(void)
 {
-
 	switch (getch())
 	{
 		case (KEY_UP):

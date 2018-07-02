@@ -22,12 +22,12 @@ public:
 
 	AEntity *			getCell(int x, int y) const;
 	void				setCell(int x, int y, AEntity *e);
+	void				clearCell(int x, int y);
 
 	void				updateAllCells(void);
 	void				renderAllCells(WINDOW *win);
 	void				debugAllCells(WINDOW *win);
-	void				clearCell(int x, int y);
-
+	
 private:
 
 	int					_width;

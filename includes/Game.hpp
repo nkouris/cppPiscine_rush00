@@ -62,13 +62,13 @@ private:
 	void						_processInput(void);
 
 	void						_update(void);
+	void						_generateScenery(void);
+	void						_generateEnemies(void);
 
 	void						_render(void) const;
 	void						_updateGameWindow(void) const;
 	void						_updateInfoWindow(void) const;
-	void						_generateScenery(void);
-	void						_generateEnemies(void);
-	
+		
 };
 
 #endif
