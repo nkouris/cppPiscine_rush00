@@ -251,6 +251,7 @@ void				Game::_updateGameWindow(void) const
 void				Game::_updateInfoWindow(void) const
 {
 	wclear(this->_infoWindow);
+
 	std::chrono::steady_clock::time_point mark = std::chrono::steady_clock::now();
 
 	std::string minutesTime =
@@ -260,22 +261,42 @@ void				Game::_updateInfoWindow(void) const
 
 //	this->_board->debugAllCells(this->_infoWindow);
 
-	mvwprintw(this->_infoWindow, 1, 1, "Time:\t%02s:%02s", minutesTime.data(), secondsTime.data());
-	mvwprintw(this->_infoWindow, 2, 1, "Score:\t%llu", this->_score);
-	//mvwprintw(this->_infoWindow, 4, 1, "Lives:\t%u", this->_isGameOver ? 0 : this->_player->getLives());
-	mvwprintw(this->_infoWindow, 4, 1, "Lives:\t");
-	for (int i = 0; i < this->_player->getLives(); i++)
-		wprintw(this->_infoWindow, "%lc ", L'💖');
-	//mvwprintw(this->_infoWindow, 5, 1, "Bombs:\t%u", this->_isGameOver ? 0 : this->_player->getBombs());
-	mvwprintw(this->_infoWindow, 5, 1, "Bombs:\t");
-	for (int i = 0; i < this->_player->getBombs(); i++)
-		wprintw(this->_infoWindow, "%lc ", L'💣');
+	mvwprintw(this->_infoWindow, 1, 2, "Time:\t\t%02s:%02s", minutesTime.data(), secondsTime.data());
+	mvwprintw(this->_infoWindow, 2, 2, "Score:\t%llu", this->_score);
+	
+	mvwprintw(this->_infoWindow, 4, 2, "Lives:\t");
+	if (this->_isGameOver == false)
+	{
+		for (int i = 0; i < this->_player->getLives(); i++)
+			wprintw(this->_infoWindow, "%lc ", L'💖');
+	}
+	
+	mvwprintw(this->_infoWindow, 5, 2, "Bombs:\t");
+	if (this->_isGameOver == false)
+	{
+		for (int i = 0; i < this->_player->getBombs(); i++)
+			wprintw(this->_infoWindow, "%lc ", L'💣');
+	}
 
 	if (this->_isGameOver)
 	{
-		mvwprintw(this->_infoWindow, 7, 1, "GAME OVER");
-		mvwprintw(this->_infoWindow, 9, 1, "Press R to restart");
-		mvwprintw(this->_infoWindow, 10, 1, "Press Q to quit");
+		int attr;
+
+		wattron(this->_infoWindow, A_STANDOUT);
+		mvwprintw(this->_infoWindow, 7, 2, "GAME OVER");
+		wattroff(this->_infoWindow, A_STANDOUT);
+
+		init_pair(100, COLOR_GREEN, COLOR_BLACK);
+		attr = COLOR_PAIR(100) | A_BOLD;
+		mvwprintw(this->_infoWindow, 9, 2, "Press ");
+		waddch(this->_infoWindow, 'R' | attr);
+		wprintw(this->_infoWindow, " to restart");
+
+		init_pair(101, COLOR_RED, COLOR_BLACK);
+		attr = COLOR_PAIR(101) | A_BOLD;
+		mvwprintw(this->_infoWindow, 10, 2, "Press ");
+		waddch(this->_infoWindow, 'Q' | attr);
+		wprintw(this->_infoWindow, " to quit");
 	}
 
 	wborder(this->_infoWindow, '|', '|', '-', '-', '+', '+', '+', '+');
