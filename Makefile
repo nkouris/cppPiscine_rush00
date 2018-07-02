@@ -9,7 +9,7 @@ INCLUDES = includes
 SRCSDIR = srcs/
 SRCS = AEntity.cpp AEnemy.cpp AMoving.cpp \
 		Board.cpp Bullet.cpp BulletKnight.cpp \
-		EnemyCop.cpp EnemyFace.cpp EnemyTypeB.cpp \
+		EnemyCop.cpp EnemyFace.cpp \
 		Game.cpp Player.cpp Poop.cpp Scene.cpp \
 		main.cpp
 

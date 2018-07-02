@@ -12,7 +12,6 @@
 # include "Board.hpp"
 # include "Scene.hpp"
 # include "BulletKnight.hpp"
-# include "EnemyTypeB.hpp"
 # include "EnemyFace.hpp"
 # include "EnemyCop.hpp"
 
@@ -70,11 +69,6 @@ private:
 	void						_generateScenery(void);
 	void						_generateEnemies(void);
 	
-	Game &		operator=(Game const &src);
-	Game(Game const &src);
-
-	
-
 };
 
 #endif
